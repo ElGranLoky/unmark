@@ -2,7 +2,7 @@ FROM ruby:alpine as build
 
 #Download unmark and setup base
 RUN apk update \
-&& apk --no-cache add git build-base ruby-dev \
+&& apk --no-cache add git python3 build-base ruby-dev \
 && mkdir /src \
 && cd /src/ \
 && git clone https://github.com/cdevroe/unmark.git
@@ -23,7 +23,8 @@ FROM webdevops/php-nginx:7.4-alpine as app
 ARG BUILD_DATE
 ARG VCS_REF
 
-LABEL org.label-schema.build-date=$BUILD_DATE \
+LABEL maintainer="https://github.com/ElGranLoky" \
+      org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-url="https://github.com/ElGranLoky/unmark.git" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.schema-version="1.0.0-rc1"
